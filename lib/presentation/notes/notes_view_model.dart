@@ -1,16 +1,16 @@
-import 'dart:collection';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_note/domain/repository/note_repository.dart';
 import 'package:flutter_note/presentation/notes/notes_event.dart';
+import 'package:flutter_note/presentation/notes/notes_state.dart';
 
 import '../../domain/model/note.dart';
 
 class NoteViewModel with ChangeNotifier {
   final NoteRepository repository;
 
-  List<Note> _notes =[];
-  UnmodifiableListView<Note> get notes => UnmodifiableListView(_notes);
+  //NotesState _state = NotesState(); // default값 넣은 경우
+  NotesState _state = NotesState(notes: []); // required로 한 경우
+  NotesState get state => _state;
 
   Note? _recentlyDeletedNote;
 
@@ -26,7 +26,9 @@ class NoteViewModel with ChangeNotifier {
 
   Future<void> _loadNotes() async {
     List<Note> notes = await repository.getNotes();
-    _notes = notes;
+    _state = state.copyWith(
+      notes: notes,
+    );
     notifyListeners();
   }
 
