@@ -12,7 +12,7 @@ class NoteViewModel with ChangeNotifier {
   NotesState _state = NotesState(notes: []); // required로 한 경우
   NotesState get state => _state;
 
-  Note? _recentlyDeletedNote;
+  Note? _recentlyDeletedNote; // 마지막에 삭제된 노트
 
   NoteViewModel(this.repository);
 
@@ -37,7 +37,7 @@ class NoteViewModel with ChangeNotifier {
 
     _recentlyDeletedNote = note;
 
-    await _loadNotes();
+    await _loadNotes(); // data 다시 읽어옴
   }
 
   Future<void> _restoreNote() async {
