@@ -11,7 +11,8 @@ part 'notes_state.g.dart';
 @freezed
 class NotesState with _$NotesState {
   factory NotesState({
-    //@Default([]) List<Note> notes, //view모델에서 초기값 안넣어도 됨
+    // 방법1. // @Default([]) List<Note> notes, // 어노테이션으로 default값 넣는 것
+    // 방법2. 아래처럼 required로 하고 note_view_model에서 초기값 넣어도 됨
     required List<Note> notes,
   }) = _NotesState;
 
