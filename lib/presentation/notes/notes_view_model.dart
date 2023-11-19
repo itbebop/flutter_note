@@ -7,6 +7,7 @@ import '../../domain/model/note.dart';
 
 class NoteViewModel with ChangeNotifier {
   final NoteRepository repository;
+  NoteViewModel(this.repository);
 
   //NotesState _state = NotesState(); // default값 넣은 경우
   NotesState _state = NotesState(notes: []); // required로 한 경우
@@ -14,9 +15,8 @@ class NoteViewModel with ChangeNotifier {
 
   Note? _recentlyDeletedNote; // 마지막에 삭제된 노트
 
-  NoteViewModel(this.repository);
-
   void onEvent(NotesEvent event) {
+    // when -> freezed에서 제공하는 함수
     event.when(
       loadNotes: _loadNotes,
       deleteNote: _deleteNote,

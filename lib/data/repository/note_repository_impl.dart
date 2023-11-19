@@ -6,7 +6,7 @@ import '../../domain/repository/note_repository.dart';
 class NoteRepositoryImpl implements NoteRepository {
   final NoteDbHelper db;
 
-  NoteRepositoryImpl(this.db);
+  NoteRepositoryImpl(this.db); //db의 기능을 활용할 것
 
   @override
   Future<void> deleteNote(Note note) async {

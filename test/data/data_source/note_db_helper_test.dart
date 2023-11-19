@@ -7,11 +7,12 @@ void main() {
   test('db test', () async {
     final db = await databaseFactoryFfi.openDatabase(inMemoryDatabasePath); // 가상 메모리를 만들어서 테스트할 것
 
-    await db.execute(
-        'CREATE TABLE note (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, color INTEGER, timestamp INTEGER)');
+    // 테이블 생성
+    await db.execute('CREATE TABLE note (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, color INTEGER, timestamp INTEGER)');
 
     final noteDbHelper = NoteDbHelper(db);
 
+    // data 하나를 넣음
     await noteDbHelper.insertNote(Note(
       title: 'test',
       content: 'test',
@@ -35,6 +36,6 @@ void main() {
     await noteDbHelper.deleteNote(note);
     expect((await noteDbHelper.getNotes()).length, 0);
 
-    await db.close(); // 닫아줘야 금방 끝남
+    await db.close(); // 닫아줘야 test 금방 끝남
   });
 }
